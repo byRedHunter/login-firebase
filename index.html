@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Firebase auth Example</title>
+
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css"
+		/>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container">
+				<a class="navbar-brand" href="#">Navbar</a>
+
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item logged-out" style="display: none;">
+							<a
+								class="nav-link"
+								href="#"
+								data-toggle="modal"
+								data-target="#signinModal"
+								>SignIn</a
+							>
+						</li>
+
+						<li class="nav-item logged-out" style="display: none;">
+							<a
+								class="nav-link"
+								href="#"
+								data-toggle="modal"
+								data-target="#signupModal"
+								>SignUp</a
+							>
+						</li>
+
+						<li class="nav-item logged-in" style="display: none;">
+							<a class="nav-link" href="#" id="logout">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- posts -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<ul class="list-group mt-5" id="posts">
+						<!-- <li class="list-group-item border-success">
+							<h3 class="text-danger">Titulo</h3>
+							<p class="text-info mt-3">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+								Possimus, commodi.
+							</p>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- posts -->
+
+		<!-- Modal SignUp-->
+		<div
+			class="modal"
+			id="signupModal"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalCenteredLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title h4 text-info" id="exampleModalCenteredLabel">
+							SignUp
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<form id="signup-form">
+							<div class="form-group">
+								<input
+									type="email"
+									name=""
+									id="signup-email"
+									class="form-control"
+									placeholder="Email"
+									required
+								/>
+							</div>
+
+							<div class="form-group">
+								<input
+									type="password"
+									name=""
+									id="signup-password"
+									class="form-control"
+									placeholder="Password"
+									required
+								/>
+							</div>
+
+							<div class="form-group text-right">
+								<div class="btn-group">
+									<button
+										type="button"
+										class="btn btn-secondary px-5"
+										data-dismiss="modal"
+									>
+										Close
+									</button>
+									<button type="submit" class="btn btn-success px-5">
+										SignUp
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal SignUp-->
+
+		<!-- Modal SignIn-->
+		<div
+			class="modal"
+			id="signinModal"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalCenteredLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title h4 text-info" id="exampleModalCenteredLabel">
+							SignIn
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<form id="login-form">
+							<div class="form-group">
+								<input
+									type="text"
+									id="login-email"
+									class="form-control"
+									placeholder="Email"
+									required
+								/>
+							</div>
+
+							<div class="form-group">
+								<input
+									type="password"
+									id="login-password"
+									class="form-control"
+									placeholder="Password"
+									required
+								/>
+							</div>
+
+							<div class="form-group text-right">
+								<div class="btn-group">
+									<button
+										type="button"
+										class="btn btn-secondary px-5"
+										data-dismiss="modal"
+									>
+										Close
+									</button>
+									<button type="submit" class="btn btn-success px-5">
+										SignIn
+									</button>
+								</div>
+							</div>
+
+							<button
+								class="btn btn-info btn-block"
+								id="facebookButton"
+								type="button"
+							>
+								Login with Facebook
+							</button>
+
+							<button
+								class="btn btn-primary btn-block"
+								id="googleButton"
+								type="button"
+							>
+								Login with Google
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal SignIn-->
+
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+		<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: 'AIzaSyDp4aBqNEH6Ga9n6pEKydPpXG9-k82OEt8',
+				authDomain: 'login-firebase-626da.firebaseapp.com',
+				databaseURL: 'https://login-firebase-626da.firebaseio.com',
+				projectId: 'login-firebase-626da',
+				storageBucket: 'login-firebase-626da.appspot.com',
+				messagingSenderId: '880005324376',
+				appId: '1:880005324376:web:22e44fdf19757d1b7c742d',
+			}
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig)
+
+			const auth = firebase.auth()
+			const fs = firebase.firestore()
+		</script>
+
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="./main.js"></script>
+	</body>
+</html>
